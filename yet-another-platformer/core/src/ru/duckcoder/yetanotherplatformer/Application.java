@@ -1,31 +1,33 @@
 package ru.duckcoder.yetanotherplatformer;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import lombok.Getter;
+import ru.duckcoder.yetanotherplatformer.screen.PlayScreen;
 
-public class Application extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+public class Application extends Game {
+	public static final int V_WIDTH = 1280;
+	public static final int V_HEIGHT = 720;
+
+	@Getter
+	private SpriteBatch spriteBatch;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		this.spriteBatch = new SpriteBatch();
+		this.setScreen(new PlayScreen(this));
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		super.render();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+		this.spriteBatch.dispose();
 	}
 }
